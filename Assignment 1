@@ -1,1 +1,93 @@
+package application;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
+import javafx.scene.Group;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+
+/**
+ * Write a JavaFX application that displays a picture
+ * The image should be about 600 pixels wide by 500 pixels high
+ * involve at least two types of shapes
+ * and at least two colors
+ * 
+ * @author Akshay Verma
+ * COSC 3550 Assignment 1
+ * Due 1/22/20
+ * 
+ */
+
+public class Assignment1 extends Application 
+{
+    public static void main(String[] args) 
+    {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage theStage) 
+    {
+        theStage.setTitle( "City" );
+        
+        Group root = new Group();
+        Scene theScene = new Scene( root );
+        theStage.setScene( theScene );
+        
+        Canvas canvas = new Canvas( 600, 500 );
+        root.getChildren().add( canvas );
+        
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        render(gc);
+        
+        theStage.show();
+    }
+    
+    void render(GraphicsContext gc)
+    {
+    	// Clear background
+    	gc.setFill( Color.WHITE );
+        gc.fillRect( 0, 0, 600, 500);
+        
+        // Draw Squares
+        int x;	//x-coordinate for the square
+        int i;   // loop control variable
+        x = 10;
+        for ( i = 1; i <= 6; i++ ) {
+        	//Alternate color scheme
+        	if(i%2==0)//check if counter is divisible by 2
+        	{
+        		gc.setFill(Color.LIGHTCORAL); //LIGHTCORAL Squares
+        	}
+        	else 
+        	{
+        		gc.setFill(Color.SPRINGGREEN);//SPRINGGREEN Squares
+        	}
+        	gc.fillRect( x, 0, 30, 30); 
+            x += 100; // increase x by 100 before iterating
+        }
+        
+        //Draw Circles
+        x = 10;
+        int y = 10;
+        for(i = 1; i<=8; i++)
+        {
+        	//Alternate Color Scheme
+        	if(i%2==0)
+        	{
+        		gc.setFill(Color.YELLOW);//YELLOW Circles
+        	}
+        	else
+        	{
+        		gc.setFill(Color.MEDIUMTURQUOISE);//MEDIUMTURQUOISE Circles
+        	}
+        	//create circle
+        	gc.fillOval(x, y, 18, 18);
+        	//get new coordinates
+        	x += 75;
+        	y += 50;
+        }
+    }
+}
